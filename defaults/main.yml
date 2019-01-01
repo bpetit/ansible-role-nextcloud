@@ -6,4 +6,5 @@ nextcloud_version: 15.0.0
 nextcloud_tarball_url: "{{ nextcloud_download_url }}/nextcloud-{{ nextcloud_version }}.zip"
 nextcloud_tarball_tmp_path: "/tmp/nextcloud-{{ nextcloud_version }}.zip"
 nextcloud_tarball_md5_sum_url: "{{ nextcloud_download_url }}/nextcloud-{{ nextcloud_version }}.zip.md5"
-
+nextcloud_install_path: "/var/www/nextcloud"
+nextcloud_system_user: www-data

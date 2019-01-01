@@ -9,3 +9,16 @@
 
 - name: handle dependencies
   include: dependencies.yml
+
+- name: ensure install path exists
+  file:
+    path: "{{ nextcloud_install_path }}"
+    state: directory
+    user: "{{ nextcloud_system_user }}"
+    group: "{{ nextcloud_system_group }}"
+
+- name: unarchive tarball
+  unarchive:
+    src: "{{ nextcloud_tarball_tmp_path }}"
+    dest: "{{ nextcloud_install_path }}"
+    remote_src: yes
