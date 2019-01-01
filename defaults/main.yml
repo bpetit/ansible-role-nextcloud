@@ -1,0 +1,9 @@
+---
+# defaults file for nextcloud
+
+nextcloud_download_url: https://download.nextcloud.com/server/releases/
+nextcloud_version: 15.0.0
+nextcloud_tarball_url: "{{ nextcloud_download_url }}/nextcloud-{{ nextcloud_version }}.zip"
+nextcloud_tarball_tmp_path: "/tmp/nextcloud-{{ nextcloud_version }}.zip"
+nextcloud_tarball_md5_sum_url: "{{ nextcloud_download_url }}/nextcloud-{{ nextcloud_version }}.zip.md5"
+

@@ -1,0 +1,11 @@
+---
+# tasks file for nextcloud
+
+- name: download nextcloud archive
+  get_url:
+    url: "{{ nextcloud_tarball_url }}"
+    dest: "{{ nextcloud_tarball_tmp_path }}"
+    checksum: 'md5:{{ nextcloud_tarball_md5_sum_url }}'
+
+- name: handle dependencies
+  include: dependencies.yml
