@@ -1,0 +1,10 @@
+<VirtualHost *:{{ nextcloud_http_port }}>
+  DocumentRoot {{ nextcloud_install_path }}/nextcloud
+  ServerName {{ nextcloud_server_name }}
+
+<Directory "{{ nextcloud_install_path }}/nextcloud">
+  Require all granted
+  AllowOverride All
+  Options FollowSymLinks MultiViews
+</Directory>
+</VirtualHost>

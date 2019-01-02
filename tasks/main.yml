@@ -14,7 +14,7 @@
   file:
     path: "{{ nextcloud_install_path }}"
     state: directory
-    user: "{{ nextcloud_system_user }}"
+    owner: "{{ nextcloud_system_user }}"
     group: "{{ nextcloud_system_group }}"
 
 - name: unarchive tarball
@@ -22,3 +22,33 @@
     src: "{{ nextcloud_tarball_tmp_path }}"
     dest: "{{ nextcloud_install_path }}"
     remote_src: yes
+    owner: "{{ nextcloud_system_user }}"
+    group: "{{ nextcloud_system_group }}"
+
+- name: configure apache vhost
+  template:
+    src: nextcloud.service.j2
+    dest: /etc/apache2/sites-available/nextcloud.conf
+
+- name: activate apache vhost
+  shell: a2ensite nextcloud
+
+- name: disable default vhost
+  shell: a2dissite 000-default
+  ignore_errors: yes
+
+- name: check configuration
+  shell: "apache2ctl configtest"
+  register: result
+
+- debug:
+    var: result
+
+- fail:
+    msg: "Apache configuration is faulty. Please fix and run the playbook one more time."
+  when: "result.rc != 0"
+
+- name: reload apache
+  service:
+    name: apache2
+    state: reloaded

@@ -13,3 +13,4 @@
     - php-imagick
     - php7.2-xml
     - php7.2-zip
+    - unzip

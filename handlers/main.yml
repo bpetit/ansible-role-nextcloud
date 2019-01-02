@@ -1,2 +1,7 @@
 ---
 # handlers file for nextcloud
+
+- name: reload apache
+  service:
+    name: apache2
+    state: reloaded
